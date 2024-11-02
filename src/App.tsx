@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import ProjectList from './components/ProjectList';
+import AddProjectForm from './components/AddProjectForm';
+import ProjectDetailsModal from './components/ProjectDetailsModal';
 
-function App() {
+const App: React.FC = () => {
+  const [selectedProject, setSelectedProject] = useState<any>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleProjectClick = (project: any) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ padding: "20px" }}>
+      <h1>Wondercraftz Project Management</h1>
+      <AddProjectForm />
+      <ProjectList onRowClick={handleProjectClick} />
+      <ProjectDetailsModal
+        open={isModalOpen}
+        handleClose={() => setIsModalOpen(false)}
+        project={selectedProject}
+      />
     </div>
   );
-}
+};
 
 export default App;
