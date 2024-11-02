@@ -10,7 +10,7 @@ const AddProjectForm: React.FC = () => {
     try {
       await addDoc(collection(db, 'projects'), {
         name: projectName,
-        owner: 'John Doe',
+        owner: 'Komal',
         created_at: new Date().toISOString()
       });
       setProjectName('');
